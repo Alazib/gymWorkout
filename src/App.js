@@ -43,10 +43,18 @@ function App() {
           onChange={handleInputChange}
           required
         ></input>
-        <label htmlFor="name">Name:</label>
+        <label htmlFor="name">Name: </label>
         <input
           id="name"
           name="name"
+          type="text"
+          onChange={handleInputChange}
+          required
+        ></input>
+        <label htmlFor="height">Height (cm): </label>
+        <input
+          id="height"
+          name="height"
           type="text"
           onChange={handleInputChange}
           required
