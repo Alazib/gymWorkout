@@ -1,6 +1,7 @@
 import { useState } from "react"
 import Label from "./components/Label"
 import Input from "./components/Input"
+import postServer from "./services/postServer"
 
 function App() {
   const [userData, setUserData] = useState({ email: "" })
@@ -15,51 +16,40 @@ function App() {
   }
 
   async function postNewUser() {
-    console.log("Dentro de función postNewUser")
-    const URL = "http//workOut-server.net"
-    const myInit = {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(userData),
-    }
-
-    fetch(URL, myInit)
-      .then((response) => {
-        console.log("Dentro del then 1")
-        return response.json
-      })
-      .catch((error) => error)
+    postServer(userData)
   }
-
-  console.log(userData)
 
   return (
     <div className="app">
       <h3>Welcome to Gym Workout, user. We would like to know you better:</h3>
-      <form onSubmit={sendInputData}>
-        <Label htmlFor={"email"} title="Email: " />
-        <Input
-          id={"email"}
-          name={"email"}
-          type={"email"}
-          onChange={handleInputChange}
-        />
-        <Label htmlFor={"name"} title="Name: " />
-        <Input
-          id={"name"}
-          name={"name"}
-          type={"text"}
-          onChange={handleInputChange}
-        />
-        <Label htmlFor={"height"} title="Height (cm): " />
-        <Input
-          id={"height"}
-          name={"height"}
-          type={"number"}
-          onChange={handleInputChange}
-        />
+      <form className="new-user-form" onSubmit={sendInputData}>
+        <div className="email input">
+          <Label htmlFor={"email"} title="Email: " />
+          <Input
+            id={"email"}
+            name={"email"}
+            type={"email"}
+            onChange={handleInputChange}
+          />
+        </div>
+        <div className="name input">
+          <Label htmlFor={"name"} title="Name: " />
+          <Input
+            id={"name"}
+            name={"name"}
+            type={"text"}
+            onChange={handleInputChange}
+          />
+        </div>
+        <div className="height input">
+          <Label htmlFor={"height"} title="Height (cm): " />
+          <Input
+            id={"height"}
+            name={"height"}
+            type={"number"}
+            onChange={handleInputChange}
+          />
+        </div>
         <button type="submit">Send Email</button>
       </form>
 
