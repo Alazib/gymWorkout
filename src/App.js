@@ -1,4 +1,6 @@
 import { useState } from "react"
+import Label from "./components/Label"
+import Input from "./components/Input"
 
 function App() {
   const [userData, setUserData] = useState({ email: "" })
@@ -31,34 +33,33 @@ function App() {
       .catch((error) => error)
   }
 
+  console.log(userData)
+
   return (
     <div className="app">
       <h3>Welcome to Gym Workout, user. We would like to know you better:</h3>
       <form onSubmit={sendInputData}>
-        <label htmlFor="email">Email: </label>
-        <input
-          id="email"
-          name="email"
-          type="email"
+        <Label htmlFor={"email"} title="Email: " />
+        <Input
+          id={"email"}
+          name={"email"}
+          type={"email"}
           onChange={handleInputChange}
-          required
-        ></input>
-        <label htmlFor="name">Name: </label>
-        <input
-          id="name"
-          name="name"
-          type="text"
+        />
+        <Label htmlFor={"name"} title="Name: " />
+        <Input
+          id={"name"}
+          name={"name"}
+          type={"text"}
           onChange={handleInputChange}
-          required
-        ></input>
-        <label htmlFor="height">Height (cm): </label>
-        <input
-          id="height"
-          name="height"
-          type="text"
+        />
+        <Label htmlFor={"height"} title="Height (cm): " />
+        <Input
+          id={"height"}
+          name={"height"}
+          type={"number"}
           onChange={handleInputChange}
-          required
-        ></input>
+        />
         <button type="submit">Send Email</button>
       </form>
 
