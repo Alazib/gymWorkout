@@ -12,9 +12,10 @@ describe("app renders:", () => {
     screen.getByRole("heading", { name: /welcome to Gym Workout, user/i })
   })
 
-  test("an input for the email", () => {
+  test("two inputs: email and name", () => {
     renderApp()
     screen.getByRole("textbox", { name: /email/i })
+    screen.getByRole("textbox", { name: /name/i })
   })
 
   test("a send email button", () => {

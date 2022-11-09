@@ -43,6 +43,14 @@ function App() {
           onChange={handleInputChange}
           required
         ></input>
+        <label htmlFor="name">Name:</label>
+        <input
+          id="name"
+          name="name"
+          type="text"
+          onChange={handleInputChange}
+          required
+        ></input>
         <button type="submit">Send Email</button>
       </form>
 
