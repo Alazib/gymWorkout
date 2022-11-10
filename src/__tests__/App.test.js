@@ -12,11 +12,12 @@ describe("app renders:", () => {
     screen.getByRole("heading", { name: /welcome to Gym Workout, user/i })
   })
 
-  test("three inputs: email, name and height", () => {
+  test("four inputs: email, name, height amd weight", () => {
     renderApp()
     screen.getByRole("textbox", { name: /email/i })
     screen.getByRole("textbox", { name: /name/i })
     screen.getByRole("spinbutton", { name: /height/i })
+    screen.getByRole("spinbutton", { name: /weight/i })
   })
 
   test("a send email button", () => {
@@ -38,11 +39,13 @@ describe("when user clicks in send email button", () => {
     const emailInput = screen.getByRole("textbox", { name: /email/i })
     const nameInput = screen.getByRole("textbox", { name: /name/i })
     const heightInput = screen.getByRole("spinbutton", { name: /height/i })
+    const weightInput = screen.getByRole("spinbutton", { name: /weight/i })
     const sendButton = screen.getByRole("button", { name: /send email/i })
 
     userEvent.type(emailInput, "new-user@gmail.com")
     userEvent.type(nameInput, "New User")
     userEvent.type(heightInput, "190")
+    userEvent.type(weightInput, "80")
     userEvent.click(sendButton)
 
     expect(fetch).toHaveBeenCalledWith("http//workOut-server.net", {
@@ -54,6 +57,7 @@ describe("when user clicks in send email button", () => {
         email: "new-user@gmail.com",
         name: "New User",
         height: "190",
+        weight: "80",
       }),
     })
   })

@@ -4,7 +4,7 @@ import Input from "./components/Input"
 import postServer from "./services/postServer"
 
 function App() {
-  const [userData, setUserData] = useState({ email: "" })
+  const [userData, setUserData] = useState({})
 
   function handleInputChange(e) {
     setUserData({ ...userData, [e.target.name]: e.target.value })
@@ -21,7 +21,9 @@ function App() {
 
   return (
     <div className="app">
-      <h3>Welcome to Gym Workout, user. We would like to know you better:</h3>
+      <div className="welcome-title">
+        <h3>Welcome to Gym Workout, user. We would like to know you better:</h3>
+      </div>
       <form className="new-user-form" onSubmit={sendInputData}>
         <div className="email input">
           <Label htmlFor={"email"} title="Email: " />
@@ -50,14 +52,17 @@ function App() {
             onChange={handleInputChange}
           />
         </div>
+        <div className="weight input">
+          <Label htmlFor={"weight"} title="Weight (kg): " />
+          <Input
+            id={"weight"}
+            name={"weight"}
+            type={"number"}
+            onChange={handleInputChange}
+          />
+        </div>
         <button type="submit">Send Email</button>
       </form>
-
-      {/* <label>
-        Email:
-        <input name="email"></input>
-      </label> */}
-      {/* ¿Qué es más correcto, esta forma de hacer un label-input o la anterior? Los tests pasan en los dos */}
     </div>
   )
 }
