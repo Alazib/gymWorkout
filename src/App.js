@@ -70,6 +70,22 @@ function App() {
             onChange={handleInputChange}
           />
         </div>
+        <div className="gender input">
+          <span>Gender:</span>
+          <select
+            title="gender"
+            name="gender"
+            onChange={handleInputChange}
+            required
+          >
+            <option value=""></option>
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+            <option value="I prefer not to answer">
+              I prefer not to answer
+            </option>
+          </select>
+        </div>
         <button type="submit">Send Email</button>
       </form>
     </div>
