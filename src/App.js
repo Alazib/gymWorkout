@@ -61,6 +61,15 @@ function App() {
             onChange={handleInputChange}
           />
         </div>
+        <div className="age input">
+          <Label htmlFor={"age"} title="Age: " />
+          <Input
+            id={"age"}
+            name={"age"}
+            type={"number"}
+            onChange={handleInputChange}
+          />
+        </div>
         <button type="submit">Send Email</button>
       </form>
     </div>
