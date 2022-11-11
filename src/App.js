@@ -1,7 +1,6 @@
 import { useState } from "react"
-import Label from "./components/Label"
 import Input from "./components/Input"
-import postServer from "./services/postServer"
+import saveUser from "./services/saveUser"
 
 function App() {
   const [userData, setUserData] = useState({})
@@ -16,7 +15,7 @@ function App() {
   }
 
   async function postNewUser() {
-    postServer(userData)
+    saveUser(userData)
   }
 
   return (
@@ -26,47 +25,52 @@ function App() {
       </div>
       <form className="new-user-form" onSubmit={sendInputData}>
         <div className="email input">
-          <Label htmlFor={"email"} title="Email: " />
           <Input
-            id={"email"}
-            name={"email"}
-            type={"email"}
+            htmlFor="email"
+            title="Email: "
+            id="email"
+            name="email"
+            type="email"
             onChange={handleInputChange}
           />
         </div>
         <div className="name input">
-          <Label htmlFor={"name"} title="Name: " />
           <Input
-            id={"name"}
-            name={"name"}
-            type={"text"}
+            htmlFor="name"
+            title="Name: "
+            id="name"
+            name="name"
+            type="text"
             onChange={handleInputChange}
           />
         </div>
         <div className="height input">
-          <Label htmlFor={"height"} title="Height (cm): " />
           <Input
-            id={"height"}
-            name={"height"}
-            type={"number"}
+            htmlFor="height"
+            title="Height (cm): "
+            id="height"
+            name="height"
+            type="number"
             onChange={handleInputChange}
           />
         </div>
         <div className="weight input">
-          <Label htmlFor={"weight"} title="Weight (kg): " />
           <Input
-            id={"weight"}
-            name={"weight"}
-            type={"number"}
+            htmlFor="weight"
+            title="Weight (kg): "
+            id="weight"
+            name="weight"
+            type="number"
             onChange={handleInputChange}
           />
         </div>
         <div className="age input">
-          <Label htmlFor={"age"} title="Age: " />
           <Input
-            id={"age"}
-            name={"age"}
-            type={"number"}
+            htmlFor="age"
+            title="Age: "
+            id="age"
+            name="age"
+            type="number"
             onChange={handleInputChange}
           />
         </div>
@@ -86,7 +90,7 @@ function App() {
             </option>
           </select>
         </div>
-        <button type="submit">Send Email</button>
+        <button type="submit">Send</button>
       </form>
     </div>
   )

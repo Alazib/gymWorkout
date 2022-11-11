@@ -6,37 +6,58 @@ function renderApp() {
   return render(<App />)
 }
 
-describe("app renders:", () => {
-  test("a welcome message", () => {
+describe("Sign up form:", () => {
+  test("Should render a welcome message", () => {
     renderApp()
-    screen.getByRole("heading", { name: /welcome to Gym Workout, user/i })
+    const welcomeMessage = screen.getByRole("heading", {
+      name: /welcome to Gym Workout, user/i,
+    })
+    expect(welcomeMessage).toBeInTheDocument()
   })
 
-  test("six inputs: email, name, height, weight, age and gender", () => {
+  test("should render six inputs: email, name, height, weight, age and gender", () => {
     renderApp()
-    screen.getByRole("textbox", { name: /email/i })
-    screen.getByRole("textbox", { name: /name/i })
-    screen.getByRole("spinbutton", { name: /height/i })
-    screen.getByRole("spinbutton", { name: /weight/i })
-    screen.getByRole("spinbutton", { name: /age/i })
-    screen.getByRole("combobox", { name: /gender/i })
-    screen.getByRole("option", { name: "" })
-    screen.getByRole("option", { name: "Male" })
-    screen.getByRole("option", { name: /female/i })
-    screen.getByRole("option", { name: /i prefer not to answer/i })
+    const emailInput = screen.getByRole("textbox", { name: /email/i })
+    const nameInput = screen.getByRole("textbox", { name: /name/i })
+    const heightInput = screen.getByRole("spinbutton", { name: /height/i })
+    const weightInput = screen.getByRole("spinbutton", { name: /weight/i })
+    const ageInput = screen.getByRole("spinbutton", { name: /age/i })
+    const genderInput = screen.getByRole("combobox", { name: /gender/i })
+    const genderInputDefaultOption = screen.getByRole("option", { name: "" })
+    const genderInputMaleOption = screen.getByRole("option", { name: "Male" })
+    const genderInputFemaleOption = screen.getByRole("option", {
+      name: /female/i,
+    })
+    const genderInputNotAnswerOption = screen.getByRole("option", {
+      name: /i prefer not to answer/i,
+    })
+
+    expect(emailInput).toBeInTheDocument()
+    expect(nameInput).toBeInTheDocument()
+    expect(heightInput).toBeInTheDocument()
+    expect(weightInput).toBeInTheDocument()
+    expect(ageInput).toBeInTheDocument()
+    expect(genderInput).toBeInTheDocument()
+    expect(genderInputDefaultOption).toBeInTheDocument()
+    expect(genderInputMaleOption).toBeInTheDocument()
+    expect(genderInputFemaleOption).toBeInTheDocument()
+    expect(genderInputNotAnswerOption).toBeInTheDocument()
   })
 
-  test("a send email button", () => {
+  test("should render a send button", () => {
     renderApp()
-    screen.getByRole("button", { name: /send email/i })
+    const sendButton = screen.getByRole("button", { name: /send/i })
+    expect(sendButton).toBeInTheDocument()
   })
 })
 
-describe("when user clicks in send email button", () => {
+describe("When user clicks in send button", () => {
   beforeAll(() => {
     global.fetch = jest
       .fn()
-      .mockImplementationOnce(() => Promise.resolve({ json: () => {} }))
+      .mockImplementation(() =>
+        Promise.resolve({ json: () => Promise.resolve() })
+      )
   })
 
   test("user data are posted", () => {
@@ -46,16 +67,19 @@ describe("when user clicks in send email button", () => {
     const nameInput = screen.getByRole("textbox", { name: /name/i })
     const heightInput = screen.getByRole("spinbutton", { name: /height/i })
     const weightInput = screen.getByRole("spinbutton", { name: /weight/i })
-    const sendButton = screen.getByRole("button", { name: /send email/i })
-    const ageButton = screen.getByRole("spinbutton", { name: /age/i })
-    const combobox = screen.getByRole("combobox", { name: /gender/i })
-    const femaleOption = screen.getByRole("option", { name: /female/i })
+    const ageInput = screen.getByRole("spinbutton", { name: /age/i })
+    const genderInput = screen.getByRole("combobox", { name: /gender/i })
+    const genderInputFemaleOption = screen.getByRole("option", {
+      name: /female/i,
+    })
+    const sendButton = screen.getByRole("button", { name: /send/i })
+
     userEvent.type(emailInput, "new-user@gmail.com")
     userEvent.type(nameInput, "New User")
     userEvent.type(heightInput, "190")
     userEvent.type(weightInput, "80")
-    userEvent.type(ageButton, "40")
-    userEvent.selectOptions(combobox, femaleOption)
+    userEvent.type(ageInput, "40")
+    userEvent.selectOptions(genderInput, genderInputFemaleOption)
     userEvent.click(sendButton)
 
     expect(fetch).toHaveBeenCalledWith("http//workOut-server.net", {
