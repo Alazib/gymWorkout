@@ -1,4 +1,4 @@
-function postServer(userData) {
+function saveUser(userData) {
   const URL = "http//workOut-server.net"
   const myInit = {
     method: "POST",
@@ -15,4 +15,4 @@ function postServer(userData) {
     .catch((error) => error)
 }
 
-export default postServer
+export default saveUser
