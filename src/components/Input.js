@@ -1,4 +1,4 @@
-function Input({ htmlFor, title, id, name, type, onChange }) {
+function Input({ htmlFor, title, id, name, type, onChange, value }) {
   const INPUT_IS_TEXT = type === "text"
   const INPUT_IS_NUMBER = type === "number"
   const INPUT_IS_EMAIL = type === "email"
@@ -6,34 +6,30 @@ function Input({ htmlFor, title, id, name, type, onChange }) {
 
   return (
     <>
-      {
-        (type = (INPUT_IS_TEXT || INPUT_IS_NUMBER || INPUT_IS_EMAIL) && (
-          <>
-            <label htmlFor={htmlFor}>{title}</label>
-            <input
-              id={id}
-              name={name}
-              type={type}
-              onChange={onChange}
-              required
-            ></input>
-          </>
-        ))
-      }
-      {
-        (type = INPUT_IS_CHECKBOX && (
-          <>
-            <label htmlFor={htmlFor}>{title}</label>
-            <input
-              id={id}
-              name={name}
-              type={type}
-              onChange={onChange}
-              required
-            ></input>
-          </>
-        ))
-      }
+      {(INPUT_IS_TEXT || INPUT_IS_NUMBER || INPUT_IS_EMAIL) && (
+        <>
+          <label htmlFor={htmlFor}>{title}</label>
+          <input
+            id={id}
+            name={name}
+            type={type}
+            onChange={onChange}
+            required
+          ></input>
+        </>
+      )}
+      {INPUT_IS_CHECKBOX && (
+        <>
+          <input
+            id={id}
+            name={name}
+            type={type}
+            onChange={onChange}
+            value={value}
+          ></input>
+          <label htmlFor={htmlFor}>{title}</label>
+        </>
+      )}
     </>
   )
 }
