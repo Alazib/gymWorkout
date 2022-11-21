@@ -1,7 +1,15 @@
+import { useContext } from "react"
 import { useNavigate } from "react-router"
+import UserContext from "../context/User/UserContext"
 
 function Summary() {
   const navigate = useNavigate()
+
+  const user = useContext(UserContext)
+
+  console.log("all context", user)
+  console.log("state", user.state)
+
   function goBack() {
     navigate("/exercises")
   }

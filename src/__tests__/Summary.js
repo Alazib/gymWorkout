@@ -34,7 +34,6 @@ describe("Summary", () => {
     expect(userDataSection).toBeInTheDocument()
     expect(exercisesSection).toBeInTheDocument()
   })
-
   test("should render two buttons: back and submit", () => {
     renderApp()
     const backButton = screen.getByRole("button", { name: /back/i })

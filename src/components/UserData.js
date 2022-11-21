@@ -1,21 +1,23 @@
-import { useState } from "react"
+import { useContext } from "react"
 import Input from "./Input"
 import { useNavigate } from "react-router-dom"
+import UserContext from "../context/User/UserContext"
 
 function UserData() {
-  const [userData, setUserData] = useState({})
+  const { dispatch } = useContext(UserContext)
 
   const navigate = useNavigate()
 
   function handleInputChange(e) {
-    setUserData({ ...userData, [e.target.name]: e.target.value })
+    dispatch({
+      type: "ADD_EMAIL",
+      payload: e.target.value,
+    })
   }
 
   function goNext() {
     navigate("/exercises")
   }
-
-  console.log(userData)
 
   return (
     <div className="user-data-form next-button">
