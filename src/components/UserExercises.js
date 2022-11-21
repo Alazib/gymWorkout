@@ -7,10 +7,6 @@ function UserExercises() {
 
   const navigate = useNavigate()
 
-  function sendInputData(e) {
-    e.preventDefault(e)
-  }
-
   function goBack() {
     navigate("/")
   }
@@ -19,7 +15,7 @@ function UserExercises() {
   }
 
   function onChange(e) {
-    const exerciseChecked = e.target.checked === true
+    const exerciseChecked = e.target.checked
     const exerciseName = e.target.name
 
     exerciseChecked
@@ -36,7 +32,7 @@ function UserExercises() {
       <div className="exercises-header">
         <h3>Which of these exercises do you usually practise?: </h3>
       </div>
-      <form className="user-exercises-form" onSubmit={sendInputData}>
+      <form className="user-exercises-form">
         <Input
           htmlFor="bench press"
           title="Bench Press"
@@ -46,8 +42,6 @@ function UserExercises() {
           value={"bench press"}
           onChange={onChange}
         ></Input>
-
-        <button>Send data</button>
       </form>
       <button onClick={goBack}>Back</button>
       <button onClick={goNext}>Next</button>

@@ -23,11 +23,23 @@ describe("Exercises form", () => {
     expect(benchPressInput).toBeInTheDocument()
   })
 
-  test("should render two buttons: back and send data", () => {
+  test("should render two buttons: back and next", () => {
     renderApp()
-    const sendDataButton = screen.getByRole("button", { name: /send data/i })
+    const nextButton = screen.getByRole("button", { name: /next/i })
     const backButton = screen.getByRole("button", { name: /back/i })
-    expect(sendDataButton).toBeInTheDocument()
+
     expect(backButton).toBeInTheDocument()
+    expect(nextButton).toBeInTheDocument()
+  })
+
+  test("click on next button should render the summary", async () => {
+    renderApp()
+    const nextButton = screen.getByRole("button", { name: /next/i })
+    userEvent.click(nextButton)
+
+    const summaryTitle = await screen.findByRole("heading", {
+      name: /summary/i,
+    })
+    expect(summaryTitle).toBeInTheDocument()
   })
 })
