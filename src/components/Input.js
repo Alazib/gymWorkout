@@ -13,6 +13,7 @@ function Input({ htmlFor, title, id, name, type, onChange, value }) {
             id={id}
             name={name}
             type={type}
+            title={title}
             onChange={onChange}
             required
           ></input>
@@ -25,6 +26,7 @@ function Input({ htmlFor, title, id, name, type, onChange, value }) {
             name={name}
             type={type}
             onChange={onChange}
+            title={title}
             value={value}
           ></input>
           <label htmlFor={htmlFor}>{title}</label>

@@ -1,11 +1,11 @@
-function saveUser(user) {
+function saveUser(userProfile) {
   const URL = "http//workOut-server.net"
   const myInit = {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify(user),
+    body: JSON.stringify(userProfile),
   }
   fetch(URL, myInit)
     .then((response) => {

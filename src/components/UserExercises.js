@@ -1,32 +1,46 @@
 import Input from "./Input"
-import { useState } from "react"
+import { useContext } from "react"
 import { useNavigate } from "react-router"
+import UserContext from "../context/User/UserContext"
 
 function UserExercises() {
-  const [exercises, setExercises] = useState([])
+  // const [exercises, setExercises] = useState([]) Si lo pongo aquí, cuando doy a back
+  // se me reinicia a {}. Por tanto lo paso a UserState.js
 
+  const { dispatch, userExercises, setUserExercises } = useContext(UserContext)
   const navigate = useNavigate()
 
   function goBack() {
     navigate("/")
   }
   function goNext() {
+    dispatchUserExercises()
     navigate("/summary")
+  }
+
+  function dispatchUserExercises() {
+    dispatch({
+      type: "USER_EXERCISES",
+      payload: userExercises,
+    })
   }
 
   function onChange(e) {
     const exerciseChecked = e.target.checked
-    const exerciseName = e.target.name
+    const exercisesTitle = e.target.title
 
-    exerciseChecked
-      ? setExercises([...exercises, exerciseName])
-      : setExercises(
-          exercises.filter((exercise) => {
-            return exercise !== exerciseName
-          })
-        )
+    if (!userExercises.includes(exercisesTitle)) {
+      exerciseChecked
+        ? setUserExercises([...userExercises, exercisesTitle])
+        : setUserExercises(
+            userExercises.filter((exercise) => {
+              return exercise !== exercisesTitle
+            })
+          )
+    }
   }
-  console.log(exercises)
+
+  console.log(userExercises)
   return (
     <div className="user-exercises-form back-button">
       <div className="exercises-header">
@@ -39,7 +53,7 @@ function UserExercises() {
           id="bench press"
           name="bench_press"
           type="checkbox"
-          value={"bench press"}
+          value="bench press"
           onChange={onChange}
         ></Input>
       </form>

@@ -4,20 +4,31 @@ import { useNavigate } from "react-router-dom"
 import UserContext from "../context/User/UserContext"
 
 function UserData() {
-  const { dispatch } = useContext(UserContext)
+  // const [userData, setUserData] = useState({}) Si lo pongo aquí, cuando doy a back
+  // se me reinicia a {}. Por tanto lo paso a UserState.js
+
+  const { dispatch, userData, setUserData } = useContext(UserContext)
 
   const navigate = useNavigate()
 
   function handleInputChange(e) {
-    dispatch({
-      type: "ADD_EMAIL",
-      payload: e.target.value,
-    })
+    setUserData({ ...userData, [e.target.name]: e.target.value })
   }
 
   function goNext() {
+    dispatchUserData()
+
     navigate("/exercises")
   }
+
+  function dispatchUserData() {
+    dispatch({
+      type: "USER_DATA",
+      payload: userData,
+    })
+  }
+
+  console.log(userData)
 
   return (
     <div className="user-data-form next-button">

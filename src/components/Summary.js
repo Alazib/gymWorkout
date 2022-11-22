@@ -1,5 +1,6 @@
 import { useContext } from "react"
 import { useNavigate } from "react-router"
+import saveUser from "../services/saveUser"
 import UserContext from "../context/User/UserContext"
 
 function Summary() {
@@ -7,12 +8,19 @@ function Summary() {
 
   const user = useContext(UserContext)
 
-  console.log("all context", user)
-  console.log("state", user.state)
+  const { name, email, height, weight, age, gender } = user.state.userData
+
+  const [exercise_1] = user.state.userExercises
 
   function goBack() {
     navigate("/exercises")
   }
+  function handleSubmit(user) {
+    const userProfile = user.state
+    saveUser(userProfile)
+  }
+
+  console.log("all context", user)
 
   return (
     <>
@@ -20,23 +28,23 @@ function Summary() {
       <div>
         <h3>User Data</h3>
         <ul aria-label="user-data list">
-          <li aria-label="user-data name">Name:</li>
-          <li aria-label="user-data email">Email:</li>
-          <li aria-label="user-data height">Height (cm):</li>
-          <li aria-label="user-data weight">Weight (kilos):</li>
-          <li aria-label="user-data age">Age:</li>
-          <li aria-label="user-data gender">Gender:</li>
+          <li aria-label="user-data name">Name: {name}</li>
+          <li aria-label="user-data email">Email: {email}</li>
+          <li aria-label="user-data height">Height (cm): {height}</li>
+          <li aria-label="user-data weight">Weight (kilos): {weight}</li>
+          <li aria-label="user-data age">Age: {age}</li>
+          <li aria-label="user-data gender">Gender: {gender}</li>
         </ul>
       </div>
       <div>
         <h3>Exercises</h3>
         <ul aria-label="user-exercises list">
-          <li aria-label="user-exercises first"></li>
+          <li aria-label="user-exercises first">{exercise_1}: </li>
         </ul>
       </div>
 
       <button onClick={goBack}>back</button>
-      <button>Submit</button>
+      <button onClick={handleSubmit}>Submit</button>
     </>
   )
 }
