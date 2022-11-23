@@ -27,16 +27,19 @@ function UserExercises() {
 
   function onChange(e) {
     const exerciseChecked = e.target.checked
-    const exercisesTitle = e.target.title
+    const exercise = e.target.value
+    const exercisesIsInTheList = userExercises.includes(e.target.value)
 
-    if (!userExercises.includes(exercisesTitle)) {
-      exerciseChecked
-        ? setUserExercises([...userExercises, exercisesTitle])
-        : setUserExercises(
-            userExercises.filter((exercise) => {
-              return exercise !== exercisesTitle
-            })
-          )
+    if (exerciseChecked && !exercisesIsInTheList) {
+      setUserExercises([...userExercises, exercise])
+    }
+
+    if (!exerciseChecked && exercisesIsInTheList) {
+      setUserExercises(
+        userExercises.filter((filterExercise) => {
+          return filterExercise !== exercise
+        })
+      )
     }
   }
 
@@ -47,15 +50,28 @@ function UserExercises() {
         <h3>Which of these exercises do you usually practise?: </h3>
       </div>
       <form className="user-exercises-form">
-        <Input
-          htmlFor="bench press"
-          title="Bench Press"
-          id="bench press"
-          name="bench_press"
-          type="checkbox"
-          value="bench press"
-          onChange={onChange}
-        ></Input>
+        <div className="bench-press">
+          <Input
+            htmlFor="bench press"
+            title="Bench Press"
+            id="bench press"
+            name="bench_press"
+            type="checkbox"
+            value="Bench Press"
+            onChange={onChange}
+          ></Input>
+        </div>
+        <div className="dead lift">
+          <Input
+            htmlFor="dead lift"
+            title="Dead Lift"
+            id="dead lift"
+            name="dead_lift"
+            type="checkbox"
+            value="Dead Lift"
+            onChange={onChange}
+          ></Input>
+        </div>
       </form>
       <button onClick={goBack}>Back</button>
       <button onClick={goNext}>Next</button>

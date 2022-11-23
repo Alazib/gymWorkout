@@ -7,7 +7,11 @@ function UserState({ children }) {
 
   const [userExercises, setUserExercises] = useState([])
 
-  const userGlobalState = { userData: {}, userExercises: [] }
+  const userGlobalState = {
+    userData: {},
+    userExercises: [],
+    weightExercises: {},
+  }
 
   const [state, dispatch] = useReducer(UserReducer, userGlobalState)
 

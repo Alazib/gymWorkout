@@ -10,7 +10,7 @@ function Summary() {
 
   const { name, email, height, weight, age, gender } = user.state.userData
 
-  const [exercise_1] = user.state.userExercises
+  const listOfExercises = user.state.userExercises
 
   function goBack() {
     navigate("/exercises")
@@ -39,7 +39,13 @@ function Summary() {
       <div>
         <h3>Exercises</h3>
         <ul aria-label="user-exercises list">
-          <li aria-label="user-exercises first">{exercise_1}: </li>
+          {listOfExercises.map((exercise, position) => {
+            return (
+              <li key={position} aria-label={`user-exercise ${position + 1}: `}>
+                {exercise}
+              </li>
+            )
+          })}
         </ul>
       </div>
 
