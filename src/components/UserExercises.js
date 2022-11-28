@@ -56,7 +56,6 @@ function UserExercises() {
     }
   }
 
-  console.log(userExercises)
   return (
     <div className="user-exercises-form back-button">
       <div className="exercises-header">

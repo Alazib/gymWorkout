@@ -41,8 +41,6 @@ function UserData() {
     })
   }
 
-  console.log(userData, name)
-
   return (
     <div className="user-data-form next-button">
       <div className="welcome-title">

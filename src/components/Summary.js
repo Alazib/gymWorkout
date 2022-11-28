@@ -20,8 +20,6 @@ function Summary() {
     saveUser(userProfile)
   }
 
-  console.log("Exercises", userContext.state.exercises)
-
   return (
     <>
       <h1>Summary</h1>
