@@ -1,15 +1,28 @@
-import { useContext } from "react"
+import { useContext, useEffect, useState } from "react"
 import Input from "./Input"
 import { useNavigate } from "react-router-dom"
 import UserContext from "../context/User/UserContext"
 
 function UserData() {
-  // const [userData, setUserData] = useState({}) Si lo pongo aquí, cuando doy a back
-  // se me reinicia a {}. Por tanto lo paso a UserState.js
+  const [userData, setUserData] = useState({})
 
-  const { dispatch, userData, setUserData } = useContext(UserContext)
+  const userContext = useContext(UserContext)
+  const { dispatch, state } = userContext
+  const { data } = state
+  const { email, name, weight, height, age, gender } = data
 
   const navigate = useNavigate()
+
+  useEffect(() => {
+    checkIfGlobalStateHasUserData()
+  }, [])
+
+  function checkIfGlobalStateHasUserData() {
+    const globalStateHasUserData = name
+    if (globalStateHasUserData) {
+      setUserData(data)
+    }
+  }
 
   function handleInputChange(e) {
     setUserData({ ...userData, [e.target.name]: e.target.value })
@@ -28,14 +41,14 @@ function UserData() {
     })
   }
 
-  console.log(userData)
+  console.log(userData, name)
 
   return (
     <div className="user-data-form next-button">
       <div className="welcome-title">
         <h3>Welcome to Gym Workout, user. We would like to know you better:</h3>
       </div>
-      <form className="user-data-form">
+      <form className="user-data-form" onSubmit={goNext}>
         <div className="email input">
           <Input
             htmlFor="email"
@@ -43,6 +56,7 @@ function UserData() {
             id="email"
             name="email"
             type="email"
+            placeHolder={email}
             onChange={handleInputChange}
           />
         </div>
@@ -53,6 +67,7 @@ function UserData() {
             id="name"
             name="name"
             type="text"
+            placeHolder={name}
             onChange={handleInputChange}
           />
         </div>
@@ -63,6 +78,7 @@ function UserData() {
             id="height"
             name="height"
             type="number"
+            placeHolder={height}
             onChange={handleInputChange}
           />
         </div>
@@ -73,6 +89,7 @@ function UserData() {
             id="weight"
             name="weight"
             type="number"
+            placeHolder={weight}
             onChange={handleInputChange}
           />
         </div>
@@ -83,6 +100,7 @@ function UserData() {
             id="age"
             name="age"
             type="number"
+            placeHolder={age}
             onChange={handleInputChange}
           />
         </div>
@@ -94,16 +112,16 @@ function UserData() {
             onChange={handleInputChange}
             required
           >
-            <option value=""></option>
-            <option value="male">Male</option>
-            <option value="female">Female</option>
+            {data.gender && <option value={gender}>{gender}</option>}
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
             <option value="I prefer not to answer">
               I prefer not to answer
             </option>
           </select>
         </div>
+        <button type="onSubmit">Next</button>
       </form>
-      <button onClick={goNext}>Next</button>
     </div>
   )
 }

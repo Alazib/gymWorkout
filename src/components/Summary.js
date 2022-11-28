@@ -6,11 +6,11 @@ import UserContext from "../context/User/UserContext"
 function Summary() {
   const navigate = useNavigate()
 
-  const user = useContext(UserContext)
+  const userContext = useContext(UserContext)
 
-  const { name, email, height, weight, age, gender } = user.state.userData
+  const { name, email, height, weight, age, gender } = userContext.state.data
 
-  const listOfExercises = user.state.userExercises
+  const listOfExercises = userContext.state.exercises
 
   function goBack() {
     navigate("/exercises")
@@ -20,7 +20,7 @@ function Summary() {
     saveUser(userProfile)
   }
 
-  console.log("all context", user)
+  console.log("Exercises", userContext.state.exercises)
 
   return (
     <>
@@ -41,8 +41,8 @@ function Summary() {
         <ul aria-label="user-exercises list">
           {listOfExercises.map((exercise, position) => {
             return (
-              <li key={position} aria-label={`user-exercise ${position + 1}: `}>
-                {exercise}
+              <li key={position} aria-label={`user-exercise ${position + 1}`}>
+                {exercise + ":"}
               </li>
             )
           })}

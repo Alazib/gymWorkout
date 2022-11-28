@@ -1,13 +1,26 @@
 import Input from "./Input"
-import { useContext } from "react"
+import { useContext, useEffect, useState } from "react"
 import { useNavigate } from "react-router"
 import UserContext from "../context/User/UserContext"
 
 function UserExercises() {
-  // const [exercises, setExercises] = useState([]) Si lo pongo aquí, cuando doy a back
-  // se me reinicia a {}. Por tanto lo paso a UserState.js
+  const [userExercises, setUserExercises] = useState([])
 
-  const { dispatch, userExercises, setUserExercises } = useContext(UserContext)
+  const userContext = useContext(UserContext)
+  const { dispatch, state } = userContext
+  const { exercises } = state
+
+  useEffect(() => {
+    checkIfGlobalStateHasExercises()
+  }, [])
+
+  function checkIfGlobalStateHasExercises() {
+    const globalStateHasExercises = exercises.length > 0
+    if (globalStateHasExercises) {
+      setUserExercises(exercises)
+    }
+  }
+
   const navigate = useNavigate()
 
   function goBack() {
@@ -49,7 +62,7 @@ function UserExercises() {
       <div className="exercises-header">
         <h3>Which of these exercises do you usually practise?: </h3>
       </div>
-      <form className="user-exercises-form">
+      <form className="user-exercises-form" onSubmit={goNext}>
         <div className="bench-press">
           <Input
             htmlFor="bench press"
@@ -58,6 +71,7 @@ function UserExercises() {
             name="bench_press"
             type="checkbox"
             value="Bench Press"
+            checked={userExercises.includes("Bench Press")}
             onChange={onChange}
           ></Input>
         </div>
@@ -69,12 +83,13 @@ function UserExercises() {
             name="dead_lift"
             type="checkbox"
             value="Dead Lift"
+            checked={userExercises.includes("Dead Lift")}
             onChange={onChange}
           ></Input>
         </div>
+        <button>Next</button>
       </form>
       <button onClick={goBack}>Back</button>
-      <button onClick={goNext}>Next</button>
     </div>
   )
 }

@@ -1,9 +1,9 @@
 function UserReducer(state, action) {
   switch (action.type) {
     case "USER_DATA":
-      return { ...state, userData: action.payload }
+      return { ...state, data: action.payload }
     case "USER_EXERCISES":
-      return { ...state, userExercises: action.payload }
+      return { ...state, exercises: action.payload }
     default:
       return state
   }

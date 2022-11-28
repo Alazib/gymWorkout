@@ -1,29 +1,21 @@
 import UserContext from "./UserContext"
 import UserReducer from "./UserReducer"
-import { useReducer, useState } from "react"
+import { useReducer } from "react"
 
 function UserState({ children }) {
-  const [userData, setUserData] = useState({})
-
-  const [userExercises, setUserExercises] = useState([])
-
-  const userGlobalState = {
-    userData: {},
-    userExercises: [],
-    weightExercises: {},
+  const user = {
+    data: {},
+    exercises: [],
+    weight: {},
   }
 
-  const [state, dispatch] = useReducer(UserReducer, userGlobalState)
+  const [state, dispatch] = useReducer(UserReducer, user)
 
   return (
     <UserContext.Provider
       value={{
         state,
         dispatch,
-        userData,
-        setUserData,
-        userExercises,
-        setUserExercises,
       }}
     >
       {children}

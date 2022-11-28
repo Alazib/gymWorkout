@@ -1,4 +1,14 @@
-function Input({ htmlFor, title, id, name, type, onChange, value }) {
+function Input({
+  htmlFor,
+  title,
+  id,
+  name,
+  type,
+  placeHolder,
+  onChange,
+  value,
+  checked,
+}) {
   const INPUT_IS_TEXT = type === "text"
   const INPUT_IS_NUMBER = type === "number"
   const INPUT_IS_EMAIL = type === "email"
@@ -15,6 +25,7 @@ function Input({ htmlFor, title, id, name, type, onChange, value }) {
             type={type}
             title={title}
             onChange={onChange}
+            placeholder={placeHolder}
             required
           ></input>
         </>
@@ -28,6 +39,7 @@ function Input({ htmlFor, title, id, name, type, onChange, value }) {
             onChange={onChange}
             title={title}
             value={value}
+            checked={checked}
           ></input>
           <label htmlFor={htmlFor}>{title}</label>
         </>
