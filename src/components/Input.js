@@ -1,14 +1,49 @@
-function Input({ htmlFor, title, id, name, type, onChange }) {
+function Input({
+  htmlFor,
+  title,
+  id,
+  name,
+  type,
+  placeHolder,
+  onChange,
+  value,
+  checked,
+}) {
+  const INPUT_IS_TEXT = type === "text"
+  const INPUT_IS_NUMBER = type === "number"
+  const INPUT_IS_EMAIL = type === "email"
+  const INPUT_IS_CHECKBOX = type === "checkbox"
+
   return (
     <>
-      <label htmlFor={htmlFor}>{title}</label>
-      <input
-        id={id}
-        name={name}
-        type={type}
-        onChange={onChange}
-        required
-      ></input>
+      {(INPUT_IS_TEXT || INPUT_IS_NUMBER || INPUT_IS_EMAIL) && (
+        <>
+          <label htmlFor={htmlFor}>{title}</label>
+          <input
+            id={id}
+            name={name}
+            type={type}
+            title={title}
+            onChange={onChange}
+            placeholder={placeHolder}
+            required
+          ></input>
+        </>
+      )}
+      {INPUT_IS_CHECKBOX && (
+        <>
+          <input
+            id={id}
+            name={name}
+            type={type}
+            onChange={onChange}
+            title={title}
+            value={value}
+            checked={checked}
+          ></input>
+          <label htmlFor={htmlFor}>{title}</label>
+        </>
+      )}
     </>
   )
 }
