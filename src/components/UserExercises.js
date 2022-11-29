@@ -26,7 +26,8 @@ function UserExercises() {
   function goBack() {
     navigate("/")
   }
-  function goNext() {
+  function goNext(e) {
+    e.preventDefault()
     dispatchUserExercises()
     navigate("/summary")
   }

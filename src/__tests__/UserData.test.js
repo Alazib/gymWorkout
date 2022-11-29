@@ -28,7 +28,6 @@ describe("Sign up form:", () => {
     const weightInput = screen.getByRole("spinbutton", { name: /weight/i })
     const ageInput = screen.getByRole("spinbutton", { name: /age/i })
     const genderInput = screen.getByRole("combobox", { name: /gender/i })
-    const genderInputDefaultOption = screen.getByRole("option", { name: "" })
     const genderInputMaleOption = screen.getByRole("option", { name: "Male" })
     const genderInputFemaleOption = screen.getByRole("option", {
       name: /female/i,
@@ -43,7 +42,6 @@ describe("Sign up form:", () => {
     expect(weightInput).toBeInTheDocument()
     expect(ageInput).toBeInTheDocument()
     expect(genderInput).toBeInTheDocument()
-    expect(genderInputDefaultOption).toBeInTheDocument()
     expect(genderInputMaleOption).toBeInTheDocument()
     expect(genderInputFemaleOption).toBeInTheDocument()
     expect(genderInputNotAnswerOption).toBeInTheDocument()

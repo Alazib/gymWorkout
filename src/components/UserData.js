@@ -28,7 +28,8 @@ function UserData() {
     setUserData({ ...userData, [e.target.name]: e.target.value })
   }
 
-  function goNext() {
+  function goNext(e) {
+    e.preventDefault()
     dispatchUserData()
 
     navigate("/exercises")
@@ -110,7 +111,9 @@ function UserData() {
             onChange={handleInputChange}
             required
           >
-            {data.gender && <option value={gender}>{gender}</option>}
+            {(gender && <option value={gender}>{gender}</option>) || (
+              <option></option>
+            )}
             <option value="Male">Male</option>
             <option value="Female">Female</option>
             <option value="I prefer not to answer">
