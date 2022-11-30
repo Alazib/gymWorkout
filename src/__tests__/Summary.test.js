@@ -1,4 +1,4 @@
-import { getByText, render, screen } from "@testing-library/react"
+import { render, screen } from "@testing-library/react"
 import userEvent from "@testing-library/user-event"
 import { MemoryRouter, BrowserRouter } from "react-router-dom"
 import App from "../App"
@@ -76,11 +76,64 @@ describe("'Exercises' section:", () => {
 })
 
 describe("When user submits", () => {
-  test("data are posted", () => {
+  beforeEach(() => {
+    global.fetch = jest.fn().mockImplementationOnce(() => Promise.resolve())
+  })
+  test("data should be posted", () => {
     render(
       <MemoryRouter>
         <App />
       </MemoryRouter>
     )
+    const emailInput = screen.getByRole("textbox", { name: /email/i })
+    const nameInput = screen.getByRole("textbox", { name: /name/i })
+    const heightInput = screen.getByRole("spinbutton", { name: /height/i })
+    const weightInput = screen.getByRole("spinbutton", { name: /weight/i })
+    const ageInput = screen.getByRole("spinbutton", { name: /age/i })
+    const genderInput = screen.getByRole("combobox", { name: /gender/i })
+    const nextButtonFromUserData = screen.getByRole("button", { name: /next/i })
+
+    userEvent.type(emailInput, "ulysses@gmail.com")
+    userEvent.type(nameInput, "Ulysses")
+    userEvent.type(heightInput, "190")
+    userEvent.type(weightInput, "85")
+    userEvent.type(ageInput, "35")
+    userEvent.selectOptions(genderInput, "Male")
+    userEvent.click(nextButtonFromUserData)
+
+    const benchPressInput = screen.getByRole("checkbox", {
+      name: /bench press/i,
+    })
+    const deadLiftInput = screen.getByRole("checkbox", {
+      name: /dead lift/i,
+    })
+    const nextButtonFromExercises = screen.getByRole("button", {
+      name: /next/i,
+    })
+    userEvent.click(benchPressInput)
+    userEvent.click(deadLiftInput)
+    userEvent.click(nextButtonFromExercises)
+
+    const submitButtton = screen.getByRole("button", { name: /submit/i })
+    userEvent.click(submitButtton)
+
+    expect(fetch).toHaveBeenCalledWith("http//workOut-server.net", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        data: {
+          email: "ulysses@gmail.com",
+          name: "Ulysses",
+          height: "190",
+          weight: "85",
+          age: "35",
+          gender: "Male",
+        },
+        exercises: ["Bench press", "Dead Lift"],
+        weight: {},
+      }),
+    })
   })
 })

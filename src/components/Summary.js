@@ -15,8 +15,8 @@ function Summary() {
   function goBack() {
     navigate("/exercises")
   }
-  function handleSubmit(user) {
-    const userProfile = user.state
+  function handleSubmit() {
+    const userProfile = userContext.state
     saveUser(userProfile)
   }
 
