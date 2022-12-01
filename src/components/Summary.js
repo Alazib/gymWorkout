@@ -13,7 +13,7 @@ function Summary() {
   const listOfExercises = userContext.state.exercises
 
   function goBack() {
-    navigate("/exercises")
+    navigate("/weights")
   }
   function handleSubmit() {
     const userProfile = userContext.state

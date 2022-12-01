@@ -3,7 +3,7 @@ import { useContext, useEffect, useState } from "react"
 import { useNavigate } from "react-router"
 import UserContext from "../context/User/UserContext"
 
-function UserExercises() {
+function Exercises() {
   const [userExercises, setUserExercises] = useState([])
 
   const userContext = useContext(UserContext)
@@ -29,7 +29,7 @@ function UserExercises() {
   function goNext(e) {
     e.preventDefault()
     dispatchUserExercises()
-    navigate("/summary")
+    navigate("/weights")
   }
 
   function dispatchUserExercises() {
@@ -94,4 +94,4 @@ function UserExercises() {
   )
 }
 
-export default UserExercises
+export default Exercises
