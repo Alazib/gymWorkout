@@ -36,14 +36,14 @@ describe("Exercises form", () => {
     expect(nextButton).toBeInTheDocument()
   })
 
-  test("click on next button should render the summary", async () => {
+  test("click on next button should render the weights page", async () => {
     renderApp()
     const nextButton = screen.getByRole("button", { name: /next/i })
     userEvent.click(nextButton)
 
-    const summaryTitle = await screen.findByRole("heading", {
-      name: /summary/i,
+    const weightsTitle = await screen.findByRole("heading", {
+      name: /weights/i,
     })
-    expect(summaryTitle).toBeInTheDocument()
+    expect(weightsTitle).toBeInTheDocument()
   })
 })

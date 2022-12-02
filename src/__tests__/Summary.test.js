@@ -22,6 +22,11 @@ describe("Summary", () => {
     })
     userEvent.click(nextButtonFromExercises)
 
+    const nextButtonFromWeights = screen.getByRole("button", {
+      name: /next/i,
+    })
+    userEvent.click(nextButtonFromWeights)
+
     const summaryTitle = await screen.findByRole("heading", {
       name: /summary/i,
     })
@@ -113,6 +118,9 @@ describe("When user submits", () => {
     userEvent.click(benchPressInput)
     userEvent.click(deadLiftInput)
     userEvent.click(nextButtonFromExercises)
+
+    const nextButtonFromWeights = screen.getByRole("button", { name: /next/i })
+    userEvent.click(nextButtonFromWeights)
 
     const submitButtton = screen.getByRole("button", { name: /submit/i })
     userEvent.click(submitButtton)
