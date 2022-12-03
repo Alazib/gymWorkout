@@ -39,7 +39,7 @@ function Exercises() {
     })
   }
 
-  function onChange(e) {
+  function handleInputChange(e) {
     const exerciseChecked = e.target.checked
     const exercise = e.target.value
     const exercisesIsInTheList = userExercises.includes(e.target.value)
@@ -72,7 +72,7 @@ function Exercises() {
             type="checkbox"
             value="Bench Press"
             checked={userExercises.includes("Bench Press")}
-            onChange={onChange}
+            onChange={handleInputChange}
           ></Input>
         </div>
         <div className="dead lift">
@@ -84,7 +84,7 @@ function Exercises() {
             type="checkbox"
             value="Dead Lift"
             checked={userExercises.includes("Dead Lift")}
-            onChange={onChange}
+            onChange={handleInputChange}
           ></Input>
         </div>
         <button>Next</button>
