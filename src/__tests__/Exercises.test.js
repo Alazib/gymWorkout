@@ -12,7 +12,7 @@ function renderApp() {
 }
 
 describe("Exercises form", () => {
-  test("should render a checkbox with one input: bench press", async () => {
+  test("should render a checkbox with two input: bench press, and dead lift", async () => {
     renderApp()
     const nextButton = screen.getByRole("button", { name: /next/i })
     userEvent.click(nextButton)
@@ -20,7 +20,11 @@ describe("Exercises form", () => {
     const benchPressInput = await screen.findByRole("checkbox", {
       name: /bench press/i,
     })
+    const deadLiftInput = await screen.findByRole("checkbox", {
+      name: /dead lift/i,
+    })
     expect(benchPressInput).toBeInTheDocument()
+    expect(deadLiftInput).toBeInTheDocument()
   })
 
   test("should render two buttons: back and next", () => {
@@ -32,14 +36,14 @@ describe("Exercises form", () => {
     expect(nextButton).toBeInTheDocument()
   })
 
-  test("click on next button should render the summary", async () => {
+  test("click on next button should render the weights page", async () => {
     renderApp()
     const nextButton = screen.getByRole("button", { name: /next/i })
     userEvent.click(nextButton)
 
-    const summaryTitle = await screen.findByRole("heading", {
-      name: /summary/i,
+    const weightsTitle = await screen.findByRole("heading", {
+      name: /weights/i,
     })
-    expect(summaryTitle).toBeInTheDocument()
+    expect(weightsTitle).toBeInTheDocument()
   })
 })

@@ -3,7 +3,7 @@ import { useContext, useEffect, useState } from "react"
 import { useNavigate } from "react-router"
 import UserContext from "../context/User/UserContext"
 
-function UserExercises() {
+function Exercises() {
   const [userExercises, setUserExercises] = useState([])
 
   const userContext = useContext(UserContext)
@@ -26,9 +26,10 @@ function UserExercises() {
   function goBack() {
     navigate("/")
   }
-  function goNext() {
+  function goNext(e) {
+    e.preventDefault()
     dispatchUserExercises()
-    navigate("/summary")
+    navigate("/weights")
   }
 
   function dispatchUserExercises() {
@@ -38,7 +39,7 @@ function UserExercises() {
     })
   }
 
-  function onChange(e) {
+  function handleInputChange(e) {
     const exerciseChecked = e.target.checked
     const exercise = e.target.value
     const exercisesIsInTheList = userExercises.includes(e.target.value)
@@ -71,7 +72,7 @@ function UserExercises() {
             type="checkbox"
             value="Bench Press"
             checked={userExercises.includes("Bench Press")}
-            onChange={onChange}
+            onChange={handleInputChange}
           ></Input>
         </div>
         <div className="dead lift">
@@ -83,7 +84,7 @@ function UserExercises() {
             type="checkbox"
             value="Dead Lift"
             checked={userExercises.includes("Dead Lift")}
-            onChange={onChange}
+            onChange={handleInputChange}
           ></Input>
         </div>
         <button>Next</button>
@@ -93,4 +94,4 @@ function UserExercises() {
   )
 }
 
-export default UserExercises
+export default Exercises

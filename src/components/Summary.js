@@ -13,10 +13,10 @@ function Summary() {
   const listOfExercises = userContext.state.exercises
 
   function goBack() {
-    navigate("/exercises")
+    navigate("/weights")
   }
-  function handleSubmit(user) {
-    const userProfile = user.state
+  function handleSubmit() {
+    const userProfile = userContext.state
     saveUser(userProfile)
   }
 
@@ -25,14 +25,14 @@ function Summary() {
       <h1>Summary</h1>
       <div>
         <h3>User Data</h3>
-        <ul aria-label="user-data list">
-          <li aria-label="user-data name">Name: {name}</li>
-          <li aria-label="user-data email">Email: {email}</li>
-          <li aria-label="user-data height">Height (cm): {height}</li>
-          <li aria-label="user-data weight">Weight (kilos): {weight}</li>
-          <li aria-label="user-data age">Age: {age}</li>
-          <li aria-label="user-data gender">Gender: {gender}</li>
-        </ul>
+        <div className="user-data card">
+          <div>Name: {name}</div>
+          <div>Email: {email}</div>
+          <div>Height (cm): {height}</div>
+          <div>Weight (kilos): {weight}</div>
+          <div>Age: {age}</div>
+          <div>Gender: {gender}</div>
+        </div>
       </div>
       <div>
         <h3>Exercises</h3>

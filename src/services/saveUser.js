@@ -7,10 +7,9 @@ function saveUser(userProfile) {
     },
     body: JSON.stringify(userProfile),
   }
+
   fetch(URL, myInit)
-    .then((response) => {
-      return response.json
-    })
+    .then((response) => response.json)
     .catch((error) => error)
 }
 

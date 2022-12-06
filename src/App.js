@@ -1,8 +1,9 @@
 import { Route, Routes } from "react-router"
 import Summary from "./components/Summary"
 import UserData from "./components/UserData"
-import UserExercises from "./components/UserExercises"
+import Exercises from "./components/Exercises"
 import UserState from "./context/User/UserState"
+import Weights from "./components/Weights"
 
 function App() {
   return (
@@ -10,8 +11,9 @@ function App() {
       <UserState>
         <Routes>
           <Route path="/" element={<UserData />}></Route>
-          <Route path="exercises" element={<UserExercises />}></Route>
+          <Route path="exercises" element={<Exercises />}></Route>
           <Route path="summary" element={<Summary />}></Route>
+          <Route path="weights" element={<Weights />}></Route>
         </Routes>
       </UserState>
     </div>

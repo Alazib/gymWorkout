@@ -4,6 +4,8 @@ function UserReducer(state, action) {
       return { ...state, data: action.payload }
     case "USER_EXERCISES":
       return { ...state, exercises: action.payload }
+    case "USER_WEIGHTS":
+      return { ...state, weights: action.payload }
     default:
       return state
   }

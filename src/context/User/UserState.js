@@ -6,7 +6,7 @@ function UserState({ children }) {
   const user = {
     data: {},
     exercises: [],
-    weight: {},
+    weights: {},
   }
 
   const [state, dispatch] = useReducer(UserReducer, user)
