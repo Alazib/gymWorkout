@@ -139,8 +139,8 @@ describe("When user submits", () => {
           age: "35",
           gender: "Male",
         },
-        exercises: ["Bench press", "Dead Lift"],
-        weight: {},
+        exercises: ["Bench Press", "Dead Lift"],
+        weights: {},
       }),
     })
   })

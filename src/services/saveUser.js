@@ -9,7 +9,7 @@ function saveUser(userProfile) {
   }
 
   fetch(URL, myInit)
-    .then((response) => response.json)
+    .then((response) => response.json())
     .catch((error) => error)
 }
 
