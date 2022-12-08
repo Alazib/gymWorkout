@@ -9,12 +9,13 @@ function Weights() {
 
   const userContext = useContext(UserContext)
   const { state, dispatch } = userContext
-  const { exercises } = state
+  const { exercisesId } = state
   const { weights } = state
 
   useEffect(() => {
     checkIfGlobalStateHasWeights()
   }, [])
+
   function checkIfGlobalStateHasWeights() {
     const globalStateHasWeights = Object.entries(weights).length === 0
     if (!globalStateHasWeights) {
@@ -35,20 +36,20 @@ function Weights() {
   }
 
   function handleInputChange(e) {
-    const exerciseName = e.target.name
-    const weight = parseInt(e.target.value)
-    console.log(exerciseName, weight)
-    setUserWeights({ ...userWeights, [exerciseName]: weight })
+    // const exerciseName = e.target.name
+    // const weight = parseInt(e.target.value)
+    // setUserWeights({ ...userWeights, [exerciseName]: weight })
   }
 
   console.log(userWeights)
-
   return (
     <>
       <div>
         <h1>Weights</h1>
-        {exercises.map((exercise, position) => {
-          console.log(exercise)
+
+        <label>PROBANDO</label>
+
+        {/* {exercises.map((exercise, position) => {
           return (
             <Input
               key={position}
@@ -61,7 +62,7 @@ function Weights() {
               placeHolder={weights[exercise]}
             ></Input>
           )
-        })}
+        })} */}
         <button onClick={goBack}>BACK</button>
         <button onClick={goNext}>NEXT</button>
       </div>

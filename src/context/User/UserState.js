@@ -5,7 +5,8 @@ import { useReducer } from "react"
 function UserState({ children }) {
   const user = {
     data: {},
-    exercises: [],
+    exercisesId: [],
+    exercisesName: [],
     weights: {},
   }
 

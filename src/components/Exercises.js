@@ -4,20 +4,20 @@ import { useNavigate } from "react-router"
 import UserContext from "../context/User/UserContext"
 
 function Exercises() {
-  const [userExercises, setUserExercises] = useState([])
+  const [userExercisesId, setUserExercisesId] = useState([])
 
   const userContext = useContext(UserContext)
   const { dispatch, state } = userContext
-  const { exercises } = state
+  const { exercisesId } = state
 
   useEffect(() => {
     checkIfGlobalStateHasExercises()
   }, [])
 
   function checkIfGlobalStateHasExercises() {
-    const globalStateHasExercises = exercises.length > 0
+    const globalStateHasExercises = exercisesId.length > 0
     if (globalStateHasExercises) {
-      setUserExercises(exercises)
+      setUserExercisesId(exercisesId)
     }
   }
 
@@ -28,34 +28,36 @@ function Exercises() {
   }
   function goNext(e) {
     e.preventDefault()
-    dispatchUserExercises()
+    dispatchUserExercisesId()
     navigate("/weights")
   }
 
-  function dispatchUserExercises() {
+  function dispatchUserExercisesId() {
     dispatch({
-      type: "USER_EXERCISES",
-      payload: userExercises,
+      type: "USER_EXERCISES_ID",
+      payload: userExercisesId,
     })
   }
 
   function handleInputChange(e) {
     const exerciseChecked = e.target.checked
-    const exercise = e.target.value
-    const exercisesIsInTheList = userExercises.includes(e.target.value)
+    const exercise = e.target.id
+    const exercisesIsInTheList = userExercisesId.includes(e.target.id)
 
     if (exerciseChecked && !exercisesIsInTheList) {
-      setUserExercises([...userExercises, exercise])
+      setUserExercisesId([...userExercisesId, exercise])
     }
 
     if (!exerciseChecked && exercisesIsInTheList) {
-      setUserExercises(
-        userExercises.filter((filterExercise) => {
+      setUserExercisesId(
+        userExercisesId.filter((filterExercise) => {
           return filterExercise !== exercise
         })
       )
     }
   }
+
+  console.log(userExercisesId)
 
   return (
     <div className="user-exercises-form back-button">
@@ -67,23 +69,23 @@ function Exercises() {
           <Input
             htmlFor="bench press"
             title="Bench Press"
-            id="bench press"
+            id="benchPress"
             name="bench_press"
             type="checkbox"
             value="Bench Press"
-            checked={userExercises.includes("Bench Press")}
+            checked={userExercisesId.includes("benchPress")}
             onChange={handleInputChange}
           ></Input>
         </div>
-        <div className="dead lift">
+        <div className="dead-lift">
           <Input
             htmlFor="dead lift"
             title="Dead Lift"
-            id="dead lift"
+            id="deadLift"
             name="dead_lift"
             type="checkbox"
             value="Dead Lift"
-            checked={userExercises.includes("Dead Lift")}
+            checked={userExercisesId.includes("deadLift")}
             onChange={handleInputChange}
           ></Input>
         </div>
