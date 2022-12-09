@@ -5,10 +5,11 @@ import UserContext from "../context/User/UserContext"
 
 function Exercises() {
   const [userExercisesId, setUserExercisesId] = useState([])
+  const [userExercisesName, setUserExercisesName] = useState([])
 
   const userContext = useContext(UserContext)
   const { dispatch, state } = userContext
-  const { exercisesId } = state
+  const { exercisesId, exercisesName } = state
 
   useEffect(() => {
     checkIfGlobalStateHasExercises()
@@ -18,6 +19,7 @@ function Exercises() {
     const globalStateHasExercises = exercisesId.length > 0
     if (globalStateHasExercises) {
       setUserExercisesId(exercisesId)
+      setUserExercisesName(exercisesName)
     }
   }
 
@@ -29,6 +31,7 @@ function Exercises() {
   function goNext(e) {
     e.preventDefault()
     dispatchUserExercisesId()
+    dispatchUserExercisesName()
     navigate("/weights")
   }
 
@@ -38,8 +41,19 @@ function Exercises() {
       payload: userExercisesId,
     })
   }
+  function dispatchUserExercisesName() {
+    dispatch({
+      type: "USER_EXERCISES_NAME",
+      payload: userExercisesName,
+    })
+  }
 
   function handleInputChange(e) {
+    exercisesIdSetter(e)
+    exercisesNameSetter(e)
+  }
+
+  function exercisesIdSetter(e) {
     const exerciseChecked = e.target.checked
     const exercise = e.target.id
     const exercisesIsInTheList = userExercisesId.includes(e.target.id)
@@ -56,8 +70,23 @@ function Exercises() {
       )
     }
   }
+  function exercisesNameSetter(e) {
+    const exerciseChecked = e.target.checked
+    const exercise = e.target.name
+    const exercisesIsInTheList = userExercisesName.includes(e.target.name)
 
-  console.log(userExercisesId)
+    if (exerciseChecked && !exercisesIsInTheList) {
+      setUserExercisesName([...userExercisesName, exercise])
+    }
+
+    if (!exerciseChecked && exercisesIsInTheList) {
+      setUserExercisesName(
+        userExercisesName.filter((filterExercise) => {
+          return filterExercise !== exercise
+        })
+      )
+    }
+  }
 
   return (
     <div className="user-exercises-form back-button">
@@ -70,7 +99,7 @@ function Exercises() {
             htmlFor="bench press"
             title="Bench Press"
             id="benchPress"
-            name="bench_press"
+            name="Bench Press"
             type="checkbox"
             value="Bench Press"
             checked={userExercisesId.includes("benchPress")}
@@ -82,7 +111,7 @@ function Exercises() {
             htmlFor="dead lift"
             title="Dead Lift"
             id="deadLift"
-            name="dead_lift"
+            name="Dead Lift"
             type="checkbox"
             value="Dead Lift"
             checked={userExercisesId.includes("deadLift")}

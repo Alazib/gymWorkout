@@ -5,11 +5,12 @@ import Input from "./Input"
 
 function Weights() {
   const [userWeights, setUserWeights] = useState({})
+
   const navigate = useNavigate()
 
   const userContext = useContext(UserContext)
   const { state, dispatch } = userContext
-  const { exercisesId } = state
+  const { exercisesName, exercisesId } = state
   const { weights } = state
 
   useEffect(() => {
@@ -36,33 +37,37 @@ function Weights() {
   }
 
   function handleInputChange(e) {
-    // const exerciseName = e.target.name
-    // const weight = parseInt(e.target.value)
-    // setUserWeights({ ...userWeights, [exerciseName]: weight })
+    const exerciseId = e.target.id
+
+    const weight = parseInt(e.target.value)
+
+    setUserWeights({ ...userWeights, [exerciseId]: weight })
+
+    // TODO
   }
 
   console.log(userWeights)
+  console.log(exercisesId)
+  console.log(exercisesName)
   return (
     <>
       <div>
         <h1>Weights</h1>
 
-        <label>PROBANDO</label>
-
-        {/* {exercises.map((exercise, position) => {
+        {exercisesName.map((exercise, position) => {
           return (
             <Input
               key={position}
               htmlFor={exercise}
               title={exercise + ": "}
-              id={exercise}
-              type={"number"}
+              id={exercisesId[position]}
+              type="number"
               name={exercise}
               onChange={handleInputChange}
-              placeHolder={weights[exercise]}
+              placeHolder={weights[exercisesId[position]]}
             ></Input>
           )
-        })} */}
+        })}
         <button onClick={goBack}>BACK</button>
         <button onClick={goNext}>NEXT</button>
       </div>

@@ -10,7 +10,7 @@ function Summary() {
 
   const { name, email, height, weight, age, gender } = userContext.state.data
 
-  const listOfExercises = userContext.state.exercises
+  const exercisesAndWeights = userContext.state.weights
 
   function goBack() {
     navigate("/weights")
@@ -19,6 +19,7 @@ function Summary() {
     const userProfile = userContext.state
     saveUser(userProfile)
   }
+  console.log(exercisesAndWeights)
 
   return (
     <>
@@ -37,13 +38,8 @@ function Summary() {
       <div>
         <h3>Exercises</h3>
         <ul aria-label="user-exercises list">
-          {listOfExercises.map((exercise, position) => {
-            return (
-              <li key={position} aria-label={`user-exercise ${position + 1}`}>
-                {exercise + ":"}
-              </li>
-            )
-          })}
+          {exercisesAndWeights.deadLift && <h5>Hay Peso muerto</h5>}
+          {exercisesAndWeights.benchPress && <h5>Hay Press Banca</h5>}
         </ul>
       </div>
 
