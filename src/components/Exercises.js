@@ -6,86 +6,91 @@ import UserContext from "../context/User/UserContext"
 function Exercises() {
   const [userExercisesId, setUserExercisesId] = useState([])
   const [userExercisesName, setUserExercisesName] = useState([])
+  const [userWeights, setUserWeights] = useState({})
 
   const userContext = useContext(UserContext)
   const { dispatch, state } = userContext
-  const { exercisesId, exercisesName } = state
+  const { exercisesId, exercisesName, weights } = state
+
+  const navigate = useNavigate()
 
   useEffect(() => {
-    checkIfGlobalStateHasExercises()
+    setUserExercisesId(exercisesId)
+    setUserExercisesName(exercisesName)
+    setUserWeights(weights)
   }, [])
 
-  function checkIfGlobalStateHasExercises() {
-    const globalStateHasExercises = exercisesId.length > 0
-    if (globalStateHasExercises) {
-      setUserExercisesId(exercisesId)
-      setUserExercisesName(exercisesName)
+  function handleInputChange(e) {
+    const exerciseChecked = e.target.checked
+    const exerciseId = e.target.id
+    const exerciseName = e.target.name
+
+    userExercisesIdSetter(e, exerciseChecked, exerciseId)
+    userExercisesNameSetter(e, exerciseChecked, exerciseName)
+    userWeightsSetter(e, exerciseChecked, exerciseId)
+  }
+
+  function userExercisesIdSetter(e, exerciseChecked, exerciseId) {
+    if (exerciseChecked) {
+      setUserExercisesId([...userExercisesId, exerciseId])
+    }
+
+    if (!exerciseChecked) {
+      setUserExercisesId(
+        userExercisesId.filter((filterExercise) => {
+          return filterExercise !== exerciseId
+        })
+      )
     }
   }
 
-  const navigate = useNavigate()
+  function userExercisesNameSetter(e, exerciseChecked, exerciseName) {
+    if (exerciseChecked) {
+      setUserExercisesName([...userExercisesName, exerciseName])
+    }
+
+    if (!exerciseChecked) {
+      setUserExercisesName(
+        userExercisesName.filter((filterExercise) => {
+          return filterExercise !== exerciseName
+        })
+      )
+    }
+  }
+
+  function userWeightsSetter(e, exerciseChecked, exercise) {
+    if (!exerciseChecked) {
+      let userWeightsCopy = { ...userWeights }
+      delete userWeightsCopy[exercise]
+      setUserWeights(userWeightsCopy)
+    }
+  }
 
   function goBack() {
     navigate("/")
   }
+
   function goNext(e) {
     e.preventDefault()
-    dispatchUserExercisesId()
-    dispatchUserExercisesName()
+    dispatchUserState()
     navigate("/weights")
   }
 
-  function dispatchUserExercisesId() {
+  function dispatchUserState() {
     dispatch({
       type: "USER_EXERCISES_ID",
       payload: userExercisesId,
     })
-  }
-  function dispatchUserExercisesName() {
+
     dispatch({
       type: "USER_EXERCISES_NAME",
       payload: userExercisesName,
     })
-  }
 
-  function handleInputChange(e) {
-    exercisesIdSetter(e)
-    exercisesNameSetter(e)
-  }
-
-  function exercisesIdSetter(e) {
-    const exerciseChecked = e.target.checked
-    const exercise = e.target.id
-    const exercisesIsInTheList = userExercisesId.includes(e.target.id)
-
-    if (exerciseChecked && !exercisesIsInTheList) {
-      setUserExercisesId([...userExercisesId, exercise])
-    }
-
-    if (!exerciseChecked && exercisesIsInTheList) {
-      setUserExercisesId(
-        userExercisesId.filter((filterExercise) => {
-          return filterExercise !== exercise
-        })
-      )
-    }
-  }
-  function exercisesNameSetter(e) {
-    const exerciseChecked = e.target.checked
-    const exercise = e.target.name
-    const exercisesIsInTheList = userExercisesName.includes(e.target.name)
-
-    if (exerciseChecked && !exercisesIsInTheList) {
-      setUserExercisesName([...userExercisesName, exercise])
-    }
-
-    if (!exerciseChecked && exercisesIsInTheList) {
-      setUserExercisesName(
-        userExercisesName.filter((filterExercise) => {
-          return filterExercise !== exercise
-        })
-      )
-    }
+    dispatch({
+      type: "USER_WEIGHTS",
+      payload: userWeights,
+    })
   }
 
   return (
