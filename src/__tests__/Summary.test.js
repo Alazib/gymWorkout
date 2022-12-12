@@ -51,8 +51,9 @@ describe("Summary", () => {
 })
 
 describe("'User Data' section:", () => {
-  test("should render the user data with 6 items: name, email, height, weight, age and gender", () => {
+  test("should render an user data card with 6 items: name, email, height, weight, age and gender", () => {
     renderApp()
+    const dataCard = screen.getByRole("heading", { name: /user data/i })
     const name = screen.getByText(/name/i)
     const email = screen.getByText(/email/i)
     const height = screen.getByText(/height/i)
@@ -60,6 +61,7 @@ describe("'User Data' section:", () => {
     const age = screen.getByText(/age/i)
     const gender = screen.getByText(/gender/i)
 
+    expect(dataCard).toBeInTheDocument()
     expect(name).toBeInTheDocument()
     expect(email).toBeInTheDocument()
     expect(height).toBeInTheDocument()
@@ -70,13 +72,11 @@ describe("'User Data' section:", () => {
 })
 
 describe("'Exercises' section:", () => {
-  test("should render a exercises list", () => {
+  test("should render an exercises card", () => {
     renderApp()
 
-    const exercisesList = screen.getByRole("list", {
-      name: /user-exercises list/i,
-    })
-    expect(exercisesList).toBeInTheDocument()
+    const exercisesCard = screen.getByRole("heading", { name: /exercises/i })
+    expect(exercisesCard).toBeInTheDocument()
   })
 })
 
@@ -139,7 +139,8 @@ describe("When user submits", () => {
           age: "35",
           gender: "Male",
         },
-        exercises: ["Bench Press", "Dead Lift"],
+        exercisesId: ["benchPress", "deadLift"],
+        exercisesName: ["Bench Press", "Dead Lift"],
         weights: {},
       }),
     })
