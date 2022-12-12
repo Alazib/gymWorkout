@@ -25,12 +25,12 @@ function Exercises() {
     const exerciseId = e.target.id
     const exerciseName = e.target.name
 
-    userExercisesIdSetter(e, exerciseChecked, exerciseId)
-    userExercisesNameSetter(e, exerciseChecked, exerciseName)
-    userWeightsSetter(e, exerciseChecked, exerciseId)
+    userExercisesIdSetter(exerciseChecked, exerciseId)
+    userExercisesNameSetter(exerciseChecked, exerciseName)
+    userWeightsSetter(exerciseChecked, exerciseId)
   }
 
-  function userExercisesIdSetter(e, exerciseChecked, exerciseId) {
+  function userExercisesIdSetter(exerciseChecked, exerciseId) {
     if (exerciseChecked) {
       setUserExercisesId([...userExercisesId, exerciseId])
     }
@@ -44,7 +44,7 @@ function Exercises() {
     }
   }
 
-  function userExercisesNameSetter(e, exerciseChecked, exerciseName) {
+  function userExercisesNameSetter(exerciseChecked, exerciseName) {
     if (exerciseChecked) {
       setUserExercisesName([...userExercisesName, exerciseName])
     }
@@ -58,10 +58,10 @@ function Exercises() {
     }
   }
 
-  function userWeightsSetter(e, exerciseChecked, exercise) {
+  function userWeightsSetter(exerciseChecked, exerciseId) {
     if (!exerciseChecked) {
       let userWeightsCopy = { ...userWeights }
-      delete userWeightsCopy[exercise]
+      delete userWeightsCopy[exerciseId]
       setUserWeights(userWeightsCopy)
     }
   }
@@ -120,6 +120,18 @@ function Exercises() {
             type="checkbox"
             value="Dead Lift"
             checked={userExercisesId.includes("deadLift")}
+            onChange={handleInputChange}
+          ></Input>
+        </div>
+        <div className="squat">
+          <Input
+            htmlFor="Squat"
+            title="Squat"
+            id="squat"
+            name="Squat"
+            type="checkbox"
+            value="Squat"
+            checked={userExercisesId.includes("squat")}
             onChange={handleInputChange}
           ></Input>
         </div>
