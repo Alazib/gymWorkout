@@ -123,6 +123,18 @@ function Exercises() {
             onChange={handleInputChange}
           ></Input>
         </div>
+        <div className="squat">
+          <Input
+            htmlFor="Squat"
+            title="Squat"
+            id="squat"
+            name="Squat"
+            type="checkbox"
+            value="Squat"
+            checked={userExercisesId.includes("squat")}
+            onChange={handleInputChange}
+          ></Input>
+        </div>
         <button>Next</button>
       </form>
       <button onClick={goBack}>Back</button>
