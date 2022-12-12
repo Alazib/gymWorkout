@@ -14,15 +14,8 @@ function UserData() {
   const navigate = useNavigate()
 
   useEffect(() => {
-    checkIfGlobalStateHasUserData()
+    setUserData(data)
   }, [])
-
-  function checkIfGlobalStateHasUserData() {
-    const globalStateHasUserData = name
-    if (globalStateHasUserData) {
-      setUserData(data)
-    }
-  }
 
   function handleInputChange(e) {
     setUserData({ ...userData, [e.target.name]: e.target.value })

@@ -19,7 +19,6 @@ function Summary() {
     const userProfile = userContext.state
     saveUser(userProfile)
   }
-  console.log(exercisesAndWeights)
 
   return (
     <>

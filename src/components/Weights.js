@@ -6,35 +6,16 @@ import Input from "./Input"
 function Weights() {
   const [userWeights, setUserWeights] = useState({})
 
-  const navigate = useNavigate()
-
   const userContext = useContext(UserContext)
   const { state, dispatch } = userContext
   const { exercisesName, exercisesId } = state
   const { weights } = state
 
+  const navigate = useNavigate()
+
   useEffect(() => {
-    checkIfGlobalStateHasWeights()
+    setUserWeights(weights)
   }, [])
-
-  function checkIfGlobalStateHasWeights() {
-    const globalStateHasWeights = Object.entries(weights).length === 0
-    if (!globalStateHasWeights) {
-      setUserWeights(weights)
-    }
-  }
-
-  function goNext() {
-    dispatch({
-      type: "USER_WEIGHTS",
-      payload: userWeights,
-    })
-    navigate("/summary")
-  }
-
-  function goBack() {
-    navigate("/exercises")
-  }
 
   function handleInputChange(e) {
     const exerciseId = e.target.id
@@ -42,13 +23,24 @@ function Weights() {
     const weight = parseInt(e.target.value)
 
     setUserWeights({ ...userWeights, [exerciseId]: weight })
-
-    // TODO
   }
 
-  console.log(userWeights)
-  console.log(exercisesId)
-  console.log(exercisesName)
+  function goNext() {
+    navigate("/summary")
+    dispatchWeights()
+  }
+
+  function goBack() {
+    navigate("/exercises")
+  }
+
+  function dispatchWeights() {
+    dispatch({
+      type: "USER_WEIGHTS",
+      payload: userWeights,
+    })
+  }
+
   return (
     <>
       <div>
