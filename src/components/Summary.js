@@ -48,6 +48,12 @@ function Summary() {
           {exercisesAndWeights.squat && (
             <div>Squat: {exercisesAndWeights.squat} kg</div>
           )}
+          {exercisesAndWeights.pullUps && (
+            <div>Squat: {exercisesAndWeights.pullUps} kg</div>
+          )}
+          {exercisesAndWeights.militaryPress && (
+            <div>Military Press: {exercisesAndWeights.militaryPress} kg</div>
+          )}
         </div>
       </div>
 

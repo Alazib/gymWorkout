@@ -135,6 +135,30 @@ function Exercises() {
             onChange={handleInputChange}
           ></Input>
         </div>
+        <div className="pull-ups">
+          <Input
+            htmlFor="Pull Ups"
+            title="Pull Ups"
+            id="pullUps"
+            name="Pull Ups"
+            type="checkbox"
+            value="Pull Ups"
+            checked={userExercisesId.includes("pullUps")}
+            onChange={handleInputChange}
+          ></Input>
+        </div>
+        <div className="military-press">
+          <Input
+            htmlFor="Military Press"
+            title="Military Press"
+            id="militaryPress"
+            name="Military Press"
+            type="checkbox"
+            value="Military Press"
+            checked={userExercisesId.includes("militaryPress")}
+            onChange={handleInputChange}
+          ></Input>
+        </div>
         <button>Next</button>
       </form>
       <button onClick={goBack}>Back</button>
