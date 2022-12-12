@@ -12,7 +12,7 @@ function renderApp() {
 }
 
 describe("Summary", () => {
-  test("should render the title 'Summary'", async () => {
+  test("should render the title 'Summary'", () => {
     renderApp()
     const nextButtonFromUserData = screen.getByRole("button", { name: /next/i })
     userEvent.click(nextButtonFromUserData)
@@ -27,11 +27,12 @@ describe("Summary", () => {
     })
     userEvent.click(nextButtonFromWeights)
 
-    const summaryTitle = await screen.findByRole("heading", {
+    const summaryTitle = screen.getByRole("heading", {
       name: /summary/i,
     })
     expect(summaryTitle).toBeInTheDocument()
   })
+
   test("should render two sections: 'User Data' and 'Exercises'", () => {
     renderApp()
 
@@ -84,6 +85,7 @@ describe("When user submits", () => {
   beforeEach(() => {
     global.fetch = jest.fn().mockImplementationOnce(() => Promise.resolve())
   })
+
   test("data should be posted", () => {
     render(
       <MemoryRouter>
@@ -112,14 +114,52 @@ describe("When user submits", () => {
     const deadLiftInput = screen.getByRole("checkbox", {
       name: /dead lift/i,
     })
+    const squatInput = screen.getByRole("checkbox", {
+      name: /squat/i,
+    })
+    const pullUpsInput = screen.getByRole("checkbox", {
+      name: /pull ups/i,
+    })
+    const militaryPressInput = screen.getByRole("checkbox", {
+      name: /military press/i,
+    })
     const nextButtonFromExercises = screen.getByRole("button", {
       name: /next/i,
     })
     userEvent.click(benchPressInput)
     userEvent.click(deadLiftInput)
+    userEvent.click(squatInput)
+    userEvent.click(pullUpsInput)
+    userEvent.click(militaryPressInput)
+
     userEvent.click(nextButtonFromExercises)
 
+    const benchPressWeight = screen.getByRole("spinbutton", {
+      name: /bench press/i,
+    })
+    const deadLiftWeight = screen.getByRole("spinbutton", {
+      name: /dead lift/i,
+    })
+
+    const squatWeight = screen.getByRole("spinbutton", {
+      name: /squat/i,
+    })
+
+    const pullUpsWeight = screen.getByRole("spinbutton", {
+      name: /pull ups/i,
+    })
+
+    const militaryPressWeight = screen.getByRole("spinbutton", {
+      name: /military press/i,
+    })
     const nextButtonFromWeights = screen.getByRole("button", { name: /next/i })
+
+    userEvent.type(benchPressWeight, "100")
+    userEvent.type(deadLiftWeight, "150")
+    userEvent.type(squatWeight, "130")
+    userEvent.type(pullUpsWeight, "70")
+    userEvent.type(militaryPressWeight, "60")
+
     userEvent.click(nextButtonFromWeights)
 
     const submitButtton = screen.getByRole("button", { name: /submit/i })
@@ -139,9 +179,27 @@ describe("When user submits", () => {
           age: "35",
           gender: "Male",
         },
-        exercisesId: ["benchPress", "deadLift"],
-        exercisesName: ["Bench Press", "Dead Lift"],
-        weights: {},
+        exercisesId: [
+          "benchPress",
+          "deadLift",
+          "squat",
+          "pullUps",
+          "militaryPress",
+        ],
+        exercisesName: [
+          "Bench Press",
+          "Dead Lift",
+          "Squat",
+          "Pull Ups",
+          "Military Press",
+        ],
+        weights: {
+          benchPress: 100,
+          deadLift: 150,
+          squat: 130,
+          pullUps: 70,
+          militaryPress: 60,
+        },
       }),
     })
   })

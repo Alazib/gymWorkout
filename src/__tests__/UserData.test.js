@@ -53,12 +53,12 @@ describe("Sign up form:", () => {
     expect(nextButton).toBeInTheDocument()
   })
 
-  test("click on next button should render the exercises form", async () => {
+  test("click on next button should render the exercises form", () => {
     renderApp()
     const nextButton = screen.getByRole("button", { name: /next/i })
     userEvent.click(nextButton)
 
-    const headerMessage = await screen.findByRole("heading", {
+    const headerMessage = screen.getByRole("heading", {
       name: /which of these exercises/i,
     })
     expect(headerMessage).toBeInTheDocument()
