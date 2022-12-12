@@ -10,7 +10,7 @@ function Summary() {
 
   const { name, email, height, weight, age, gender } = userContext.state.data
 
-  const listOfExercises = userContext.state.exercises
+  const exercisesAndWeights = userContext.state.weights
 
   function goBack() {
     navigate("/weights")
@@ -19,13 +19,15 @@ function Summary() {
     const userProfile = userContext.state
     saveUser(userProfile)
   }
+  console.log(exercisesAndWeights)
 
   return (
     <>
       <h1>Summary</h1>
-      <div>
+
+      <div className="user-data-card">
         <h3>User Data</h3>
-        <div className="user-data card">
+        <div>
           <div>Name: {name}</div>
           <div>Email: {email}</div>
           <div>Height (cm): {height}</div>
@@ -34,17 +36,17 @@ function Summary() {
           <div>Gender: {gender}</div>
         </div>
       </div>
-      <div>
+
+      <div className="user-exercises-card">
         <h3>Exercises</h3>
-        <ul aria-label="user-exercises list">
-          {listOfExercises.map((exercise, position) => {
-            return (
-              <li key={position} aria-label={`user-exercise ${position + 1}`}>
-                {exercise + ":"}
-              </li>
-            )
-          })}
-        </ul>
+        <div>
+          {exercisesAndWeights.deadLift && (
+            <div>Dead Lift: {exercisesAndWeights.deadLift} kg</div>
+          )}
+          {exercisesAndWeights.benchPress && (
+            <div>Bench Press: {exercisesAndWeights.benchPress} kg</div>
+          )}
+        </div>
       </div>
 
       <button onClick={goBack}>back</button>
