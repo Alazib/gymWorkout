@@ -8,6 +8,7 @@ function Input({
   onChange,
   value,
   checked,
+  atLeastOneExerciseExists,
 }) {
   const INPUT_IS_TEXT = type === "text"
   const INPUT_IS_NUMBER = type === "number"
@@ -26,7 +27,7 @@ function Input({
             title={title}
             onChange={onChange}
             placeholder={placeHolder}
-            required
+            required={!placeHolder}
           ></input>
         </>
       )}
@@ -40,6 +41,7 @@ function Input({
             title={title}
             value={value}
             checked={checked}
+            required={!atLeastOneExerciseExists}
           ></input>
           <label htmlFor={htmlFor}>{title}</label>
         </>

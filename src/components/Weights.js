@@ -48,16 +48,18 @@ function Weights() {
 
         {exercisesName.map((exercise, position) => {
           return (
-            <Input
-              key={position}
-              htmlFor={exercise}
-              title={exercise + ": "}
-              id={exercisesId[position]}
-              type="number"
-              name={exercise}
-              onChange={handleInputChange}
-              placeHolder={weights[exercisesId[position]]}
-            ></Input>
+            <div key={position}>
+              <Input
+                key={position}
+                htmlFor={exercise}
+                title={exercise + ": "}
+                id={exercisesId[position]}
+                type="number"
+                name={exercise}
+                onChange={handleInputChange}
+                placeHolder={weights[exercisesId[position]]}
+              ></Input>
+            </div>
           )
         })}
         <button onClick={goBack}>BACK</button>
