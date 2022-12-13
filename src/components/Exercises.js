@@ -14,6 +14,8 @@ function Exercises() {
 
   const navigate = useNavigate()
 
+  const atLeastOneExerciseExists = userExercisesId.length > 0
+
   useEffect(() => {
     setUserExercisesId(exercisesId)
     setUserExercisesName(exercisesName)
@@ -109,6 +111,7 @@ function Exercises() {
             value="Bench Press"
             checked={userExercisesId.includes("benchPress")}
             onChange={handleInputChange}
+            atLeastOneExerciseExists={atLeastOneExerciseExists}
           ></Input>
         </div>
         <div className="dead-lift">
@@ -121,6 +124,7 @@ function Exercises() {
             value="Dead Lift"
             checked={userExercisesId.includes("deadLift")}
             onChange={handleInputChange}
+            atLeastOneExerciseExists={atLeastOneExerciseExists}
           ></Input>
         </div>
         <div className="squat">
@@ -133,6 +137,7 @@ function Exercises() {
             value="Squat"
             checked={userExercisesId.includes("squat")}
             onChange={handleInputChange}
+            atLeastOneExerciseExists={atLeastOneExerciseExists}
           ></Input>
         </div>
         <div className="pull-ups">
@@ -145,6 +150,7 @@ function Exercises() {
             value="Pull Ups"
             checked={userExercisesId.includes("pullUps")}
             onChange={handleInputChange}
+            atLeastOneExerciseExists={atLeastOneExerciseExists}
           ></Input>
         </div>
         <div className="military-press">
@@ -157,6 +163,7 @@ function Exercises() {
             value="Military Press"
             checked={userExercisesId.includes("militaryPress")}
             onChange={handleInputChange}
+            atLeastOneExerciseExists={atLeastOneExerciseExists}
           ></Input>
         </div>
         <button>Next</button>
